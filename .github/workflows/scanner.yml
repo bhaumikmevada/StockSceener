@@ -1,0 +1,45 @@
+name: Market Scanner
+
+on:
+  schedule:
+    - cron: '*/15 3-10 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      force_run:
+        description: 'Force run even if market is closed'
+        required: false
+        default: 'true'
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run market scan
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DASHBOARD_URL: ${{ vars.DASHBOARD_URL }}
+          FORCE_RUN: ${{ github.event.inputs.force_run || 'false' }}
+        run: python main.py
+
+      - name: Commit updated dashboard data
+        run: |
+          git config user.name "market-scanner-bot"
+          git config user.email "actions@github.com"
+          git add docs/data.json docs/alert_state.json
+          git diff --staged --quiet || git commit -m "Auto-update scan data $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
