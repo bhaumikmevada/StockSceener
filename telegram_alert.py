@@ -11,14 +11,14 @@ DASHBOARD_URL = os.environ.get("DASHBOARD_URL", "")  # e.g. https://username.git
 
 
 def _format_setup(setup: dict) -> str:
-    emoji = "🟢" if setup["type"] == "SWING" else "⚡"
-    reasons = "\n".join(f"  • {r}" for r in setup["reasons"])
+    label = "SWING EQUITY TRADE" if setup["type"] == "SWING" else "INTRADAY TRADE"
+    symbol = setup["symbol"].replace(".NS", "")
     return (
-        f"{emoji} *{setup['symbol'].replace('.NS','')}* — {setup['type']} | Score: {setup['score']}/100\n"
-        f"Entry: ₹{setup['entry']}   Target: ₹{setup['target']}   SL: ₹{setup['stop_loss']}\n"
-        f"Risk: {setup['risk_pct']}%   Reward: {setup['reward_pct']}%   R:R: {setup['rr_ratio']}\n"
-        f"Hold: {setup['holding_days']}   RSI: {setup['rsi']}   Vol: {setup['volume_ratio']}x\n"
-        f"{reasons}"
+        f"*{label}*\n"
+        f"BUY {symbol}\n"
+        f"Entry: ₹{setup['entry']}\n"
+        f"Target: ₹{setup['target']}\n"
+        f"SL: ₹{setup['stop_loss']}"
     )
 
 
@@ -27,29 +27,19 @@ def send_alert(swing_setups, intraday_setups, run_time_str):
         print("[WARN] Telegram credentials not set, skipping notification.")
         return
 
-    parts = [f"📊 *Market Scan — {run_time_str}*\n"]
+    parts = []
 
-    if swing_setups:
-        parts.append("*SWING PICKS (2-3 day hold)*")
-        for s in swing_setups:
-            parts.append(_format_setup(s))
-    else:
-        parts.append("_No high-quality swing setups right now._")
+    for s in swing_setups:
+        parts.append(_format_setup(s))
 
-    if intraday_setups:
-        parts.append("\n*INTRADAY PICKS*")
-        for s in intraday_setups:
-            parts.append(_format_setup(s))
-    else:
-        parts.append("_No high-quality intraday setups right now._")
+    for s in intraday_setups:
+        parts.append(_format_setup(s))
+
+    if not parts:
+        return  # nothing new to send
 
     if DASHBOARD_URL:
-        parts.append(f"\n📈 Full dashboard: {DASHBOARD_URL}")
-
-    parts.append(
-        "\n⚠️ Educational signals only, not investment advice. "
-        "No system is 90%+ accurate — always size positions responsibly."
-    )
+        parts.append(f"Full dashboard: {DASHBOARD_URL}")
 
     message = "\n\n".join(parts)
 
