@@ -95,11 +95,16 @@ def score_swing(df, symbol):
     # --- Trade plan ---
     atr_val = last["ATR14"]
     entry = round(close, 2)
-    sl = round(entry - 1.0 * atr_val, 2)               # tight SL: 1x ATR
-    target = round(entry + 2.0 * atr_val, 2)            # ~2:1 reward:risk
+    sl = round(entry - 1.5 * atr_val, 2)               # wider SL: 1.5x ATR
+    target = round(entry + 3.0 * atr_val, 2)            # 2:1 reward:risk, bigger move
     risk_pct = round((entry - sl) / entry * 100, 2)
     reward_pct = round((target - entry) / entry * 100, 2)
     rr_ratio = round((target - entry) / (entry - sl), 2) if entry > sl else None
+
+    # Skip setups where the target move is too small to matter in rupee terms,
+    # even if the R:R ratio looks fine on paper.
+    if reward_pct < 3.5:
+        return None
 
     return {
         "symbol": symbol,
@@ -175,11 +180,15 @@ def score_intraday(df, symbol):
 
     atr_val = last["ATR14"]
     entry = round(close, 2)
-    sl = round(entry - 0.8 * atr_val, 2)      # tighter SL for intraday
-    target = round(entry + 1.6 * atr_val, 2)  # ~2:1
+    sl = round(entry - 1.0 * atr_val, 2)      # slightly wider SL for intraday
+    target = round(entry + 2.0 * atr_val, 2)  # 2:1, bigger move
     risk_pct = round((entry - sl) / entry * 100, 2)
     reward_pct = round((target - entry) / entry * 100, 2)
     rr_ratio = round((target - entry) / (entry - sl), 2) if entry > sl else None
+
+    # Skip setups with too small an absolute move to be worth the trade
+    if reward_pct < 1.0:
+        return None
 
     return {
         "symbol": symbol,
