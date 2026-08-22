@@ -59,9 +59,16 @@ def rolling_low(series: pd.Series, period: int) -> pd.Series:
 
 
 def vwap(df: pd.DataFrame) -> pd.Series:
+    """
+    VWAP that resets at the start of each trading day (correct behaviour).
+    Without a daily reset, VWAP would blend multiple days together and give
+    misleading signals.
+    """
     typical_price = (df["High"] + df["Low"] + df["Close"]) / 3
-    cum_vp = (typical_price * df["Volume"]).cumsum()
-    cum_vol = df["Volume"].cumsum()
+    tp_vol = typical_price * df["Volume"]
+    day_key = df.index.date
+    cum_vp = pd.Series(tp_vol, index=df.index).groupby(day_key).cumsum()
+    cum_vol = df["Volume"].groupby(day_key).cumsum()
     return cum_vp / cum_vol.replace(0, np.nan)
 
 
