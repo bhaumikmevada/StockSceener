@@ -13,13 +13,19 @@ DASHBOARD_URL = os.environ.get("DASHBOARD_URL", "")  # e.g. https://username.git
 def _format_setup(setup: dict) -> str:
     label = "SWING EQUITY TRADE" if setup["type"] == "SWING" else "INTRADAY TRADE"
     symbol = setup["symbol"].replace(".NS", "")
-    return (
-        f"*{label}*\n"
-        f"BUY {symbol}\n"
-        f"Entry: ₹{setup['entry']}\n"
-        f"Target: ₹{setup['target']}\n"
-        f"SL: ₹{setup['stop_loss']}"
-    )
+    lines = [
+        f"*{label}*",
+        f"BUY {symbol}",
+        f"Entry: ₹{setup['entry']}",
+        f"Target: ₹{setup['target']}",
+        f"SL: ₹{setup['stop_loss']}",
+        f"Score: {setup['score']}/100 | Volume: {setup['volume_ratio']}x avg",
+    ]
+    if setup["type"] == "SWING":
+        lines.append(f"Expected: {setup['holding_days']}")
+    else:
+        lines.append(f"Hold: {setup['holding_days']}")
+    return "\n".join(lines)
 
 
 def send_alert(swing_setups, intraday_setups, run_time_str):
