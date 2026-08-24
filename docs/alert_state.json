@@ -1,10 +1,10 @@
 {
-  "date": "2026-08-22",
+  "date": "2026-08-24",
   "swing_alerted": [
     "KOTAKBANK.NS",
-    "GRASIM.NS",
-    "LT.NS",
     "JSWSTEEL.NS",
+    "LT.NS",
+    "GRASIM.NS",
     "BAJAJ-AUTO.NS"
   ],
   "intraday_alerted": []
