@@ -8,6 +8,7 @@ NOT a probability of profit. Treat scores as "how clean does this setup
 look", not "how sure are we this will win".
 """
 import numpy as np
+import pandas as pd
 
 
 def _clip(v, lo=0, hi=100):
@@ -125,10 +126,15 @@ def score_swing(df, symbol):
     }
 
 
-def score_intraday(df, symbol):
+def score_intraday(df, symbol, daily_df=None):
     """
     Intraday setup: uses recent intraday bars (5m/15m). Looks for opening
     range strength, VWAP position, RSI momentum, and relative volume.
+
+    daily_df (optional): the stock's daily-chart data. When provided, this
+    adds a multi-timeframe filter - only intraday longs that also align
+    with a healthy daily trend are allowed. This cuts down on setups that
+    look strong for an hour but are fighting the bigger trend.
     """
     if len(df) < 30 or df[["EMA9", "EMA20", "RSI14", "ATR14"]].iloc[-1].isna().any():
         return None
@@ -137,6 +143,20 @@ def score_intraday(df, symbol):
     close = last["Close"]
     reasons = []
     score = 0
+
+    # 0) Skip the opening 30 minutes - the most erratic, least reliable window
+    last_time = df.index[-1]
+    if hasattr(last_time, "time"):
+        market_open_plus_30 = last_time.replace(hour=9, minute=45, second=0, microsecond=0)
+        if last_time < market_open_plus_30:
+            return None
+
+    # 0b) Multi-timeframe filter - daily trend should not be against us
+    if daily_df is not None and len(daily_df) >= 55:
+        d_last = daily_df.iloc[-1]
+        if not pd.isna(d_last.get("EMA50", float("nan"))):
+            if d_last["Close"] < d_last["EMA50"]:
+                return None  # daily downtrend - skip intraday longs regardless of 15m picture
 
     # 1) VWAP position (25 pts)
     vwap_val = last.get("VWAP", np.nan)
@@ -154,20 +174,20 @@ def score_intraday(df, symbol):
     elif close > last["EMA9"]:
         score += 12
 
-    # 3) RSI momentum (20 pts)
+    # 3) RSI momentum (20 pts) - tightened band, avoid late/overbought entries
     rsi_val = last["RSI14"]
-    if 50 <= rsi_val <= 70:
+    if 52 <= rsi_val <= 68:
         score += 20
         reasons.append(f"RSI {rsi_val:.0f} shows active bullish momentum")
-    elif 45 <= rsi_val < 50:
+    elif 48 <= rsi_val < 52:
         score += 8
 
-    # 4) Relative volume (20 pts)
+    # 4) Relative volume (20 pts) - raised bar, needs real participation
     vol_ratio = last["VolRatio20"]
-    if vol_ratio >= 2.0:
+    if vol_ratio >= 2.5:
         score += 20
         reasons.append(f"Relative volume {vol_ratio:.1f}x - strong participation")
-    elif vol_ratio >= 1.3:
+    elif vol_ratio >= 1.6:
         score += 10
 
     # 5) MACD confirmation (10 pts)
@@ -175,7 +195,7 @@ def score_intraday(df, symbol):
         score += 10
         reasons.append("MACD histogram positive")
 
-    if score < 55:
+    if score < 65:  # raised from 55 - only cleaner setups pass now
         return None
 
     atr_val = last["ATR14"]

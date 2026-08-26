@@ -51,10 +51,12 @@ def run_swing_scan():
 
 
 def run_intraday_scan():
-    data = fetch_universe(INTRADAY_UNIVERSE, mode="intraday")
+    intraday_data = fetch_universe(INTRADAY_UNIVERSE, mode="intraday")
+    daily_data = fetch_universe(INTRADAY_UNIVERSE, mode="daily")  # for multi-timeframe filter
     setups = []
-    for sym, df in data.items():
-        result = score_intraday(df, sym)
+    for sym, df in intraday_data.items():
+        daily_df = daily_data.get(sym)
+        result = score_intraday(df, sym, daily_df=daily_df)
         if result:
             setups.append(result)
     setups.sort(key=lambda x: x["score"], reverse=True)
