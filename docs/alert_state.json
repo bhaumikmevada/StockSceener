@@ -1,11 +1,11 @@
 {
-  "date": "2026-08-25",
+  "date": "2026-08-26",
   "swing_alerted": [
+    "ADANIENT.NS",
+    "LT.NS",
     "KOTAKBANK.NS",
     "JSWSTEEL.NS",
-    "LT.NS",
-    "GRASIM.NS",
-    "EICHERMOT.NS"
+    "BPCL.NS"
   ],
   "intraday_alerted": []
 }
