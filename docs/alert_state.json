@@ -1,11 +1,11 @@
 {
-  "date": "2026-09-01",
+  "date": "2026-09-02",
   "swing_alerted": [
-    "HCLTECH.NS",
-    "ICICIBANK.NS",
+    "COALINDIA.NS",
     "JSWSTEEL.NS",
     "BPCL.NS",
-    "AXISBANK.NS"
+    "KOTAKBANK.NS",
+    "TCS.NS"
   ],
   "intraday_alerted": []
 }
