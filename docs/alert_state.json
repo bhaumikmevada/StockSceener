@@ -1,11 +1,11 @@
 {
-  "date": "2026-09-04",
+  "date": "2026-09-07",
   "swing_alerted": [
-    "BPCL.NS",
     "RELIANCE.NS",
     "ICICIBANK.NS",
-    "AXISBANK.NS",
-    "ADANIPORTS.NS"
+    "ADANIPORTS.NS",
+    "KOTAKBANK.NS",
+    "JSWSTEEL.NS"
   ],
   "intraday_alerted": []
 }
