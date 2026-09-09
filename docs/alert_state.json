@@ -1,11 +1,13 @@
 {
-  "date": "2026-09-08",
+  "date": "2026-09-09",
   "swing_alerted": [
-    "KOTAKBANK.NS",
+    "ADANIENT.NS",
     "ADANIPORTS.NS",
     "APOLLOHOSP.NS",
-    "GRASIM.NS",
-    "BAJAJ-AUTO.NS"
+    "TATASTEEL.NS",
+    "KOTAKBANK.NS"
   ],
-  "intraday_alerted": []
+  "intraday_alerted": [
+    "TATASTEEL.NS"
+  ]
 }
