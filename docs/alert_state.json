@@ -1,13 +1,11 @@
 {
-  "date": "2026-09-09",
+  "date": "2026-09-10",
   "swing_alerted": [
-    "ADANIENT.NS",
-    "ADANIPORTS.NS",
     "APOLLOHOSP.NS",
-    "TATASTEEL.NS",
-    "KOTAKBANK.NS"
+    "ADANIENT.NS",
+    "NTPC.NS",
+    "POWERGRID.NS",
+    "ADANIPORTS.NS"
   ],
-  "intraday_alerted": [
-    "TATASTEEL.NS"
-  ]
+  "intraday_alerted": []
 }
