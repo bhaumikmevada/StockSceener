@@ -1,10 +1,10 @@
 {
-  "date": "2026-09-10",
+  "date": "2026-09-11",
   "swing_alerted": [
     "APOLLOHOSP.NS",
     "ADANIENT.NS",
+    "DRREDDY.NS",
     "NTPC.NS",
-    "POWERGRID.NS",
     "ADANIPORTS.NS"
   ],
   "intraday_alerted": []
