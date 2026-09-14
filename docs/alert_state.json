@@ -1,11 +1,11 @@
 {
-  "date": "2026-09-11",
+  "date": "2026-09-14",
   "swing_alerted": [
-    "APOLLOHOSP.NS",
-    "ADANIENT.NS",
     "DRREDDY.NS",
-    "NTPC.NS",
-    "ADANIPORTS.NS"
+    "ADANIENT.NS",
+    "KOTAKBANK.NS",
+    "POWERGRID.NS",
+    "DIVISLAB.NS"
   ],
   "intraday_alerted": []
 }
