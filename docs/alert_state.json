@@ -1,11 +1,11 @@
 {
-  "date": "2026-09-21",
+  "date": "2026-09-22",
   "swing_alerted": [
+    "DRREDDY.NS",
+    "COALINDIA.NS",
     "ADANIPORTS.NS",
     "APOLLOHOSP.NS",
-    "HDFCBANK.NS",
-    "DRREDDY.NS",
-    "HDFCLIFE.NS"
+    "HDFCBANK.NS"
   ],
   "intraday_alerted": []
 }
