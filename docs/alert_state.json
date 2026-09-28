@@ -1,11 +1,11 @@
 {
-  "date": "2026-09-25",
+  "date": "2026-09-28",
   "swing_alerted": [
-    "COALINDIA.NS",
-    "HEROMOTOCO.NS",
-    "ADANIPORTS.NS",
+    "DRREDDY.NS",
     "APOLLOHOSP.NS",
-    "POWERGRID.NS"
+    "HEROMOTOCO.NS",
+    "COALINDIA.NS",
+    "DIVISLAB.NS"
   ],
   "intraday_alerted": []
 }
