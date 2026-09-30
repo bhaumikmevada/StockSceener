@@ -1,11 +1,10 @@
 {
-  "date": "2026-09-29",
+  "date": "2026-09-30",
   "swing_alerted": [
-    "DRREDDY.NS",
     "ADANIPORTS.NS",
-    "COALINDIA.NS",
-    "TATASTEEL.NS",
-    "DIVISLAB.NS"
+    "KOTAKBANK.NS",
+    "DRREDDY.NS",
+    "COALINDIA.NS"
   ],
   "intraday_alerted": []
 }
