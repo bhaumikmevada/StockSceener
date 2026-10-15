@@ -1,10 +1,10 @@
 {
-  "date": "2026-10-14",
+  "date": "2026-10-15",
   "swing_alerted": [
-    "HCLTECH.NS",
-    "NESTLEIND.NS",
-    "INFY.NS",
-    "AXISBANK.NS",
+    "TECHM.NS",
+    "BHARTIARTL.NS",
+    "DRREDDY.NS",
+    "KOTAKBANK.NS",
     "TCS.NS"
   ],
   "intraday_alerted": []
