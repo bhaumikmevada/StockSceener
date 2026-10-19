@@ -1,13 +1,11 @@
 {
-  "date": "2026-10-16",
+  "date": "2026-10-19",
   "swing_alerted": [
-    "BHARTIARTL.NS",
-    "WIPRO.NS",
-    "HCLTECH.NS",
-    "INFY.NS",
-    "ICICIBANK.NS"
+    "DRREDDY.NS",
+    "JSWSTEEL.NS",
+    "ICICIBANK.NS",
+    "SBIN.NS",
+    "HCLTECH.NS"
   ],
-  "intraday_alerted": [
-    "HDFCLIFE.NS"
-  ]
+  "intraday_alerted": []
 }
