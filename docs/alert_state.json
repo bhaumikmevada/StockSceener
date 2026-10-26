@@ -1,12 +1,11 @@
 {
-  "date": "2026-10-23",
+  "date": "2026-10-26",
   "swing_alerted": [
-    "INFY.NS",
     "DRREDDY.NS",
+    "INFY.NS",
+    "CIPLA.NS",
     "SHREECEM.NS",
     "ULTRACEMCO.NS"
   ],
-  "intraday_alerted": [
-    "INFY.NS"
-  ]
+  "intraday_alerted": []
 }
