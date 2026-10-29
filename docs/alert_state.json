@@ -1,11 +1,11 @@
 {
-  "date": "2026-10-28",
+  "date": "2026-10-29",
   "swing_alerted": [
-    "BHARTIARTL.NS",
-    "LT.NS",
+    "ADANIPORTS.NS",
+    "KOTAKBANK.NS",
     "DIVISLAB.NS",
-    "MARUTI.NS",
-    "BAJAJ-AUTO.NS"
+    "ICICIBANK.NS",
+    "HINDUNILVR.NS"
   ],
   "intraday_alerted": []
 }
