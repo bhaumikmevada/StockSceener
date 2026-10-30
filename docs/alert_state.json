@@ -1,11 +1,11 @@
 {
-  "date": "2026-10-29",
+  "date": "2026-10-30",
   "swing_alerted": [
     "ADANIPORTS.NS",
-    "KOTAKBANK.NS",
     "DIVISLAB.NS",
-    "ICICIBANK.NS",
-    "HINDUNILVR.NS"
+    "POWERGRID.NS",
+    "INFY.NS",
+    "SUNPHARMA.NS"
   ],
   "intraday_alerted": []
 }
